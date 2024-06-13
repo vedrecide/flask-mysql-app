@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-okaidia.min.css"
+    />
+  </head>
+
+  <body class="bg-stone-900">
+    <header>
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <div class="text-center sm:text-left">
+            <h1 class="text-2xl font-bold text-stone-100 sm:text-3xl">
+              TOPIC: Python
+            </h1>
+
+            <p class="mt-1.5 text-sm text-stone-200">
+              Let's solve some coding problems!
+            </p>
+          </div>
+
+          <div
+            class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center"
+          >
+            <button
+              class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-stone-700 px-5 py-3 text-gray-200 transition hover:text-gray-300 focus:outline-none focus:ring"
+              type="button"
+            >
+              <span class="text-sm font-medium"> Back to Homepage </span>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="block rounded-lg px-5 py-3 text-sm font-medium bg-stone-200 transition hover:bg-stone-300 focus:outline-none focus:ring"
+              type="button"
+            >
+              Create a Question
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <span class="flex items-center text-stone-500">
+      <span class="h-px flex-1 bg-stone-500"></span>
+      <span class="shrink-0 px-6">VVV Questions VVV</span>
+      <span class="h-px flex-1 bg-stone-500"></span>
+    </span>
+
+    <!-- Questions -->
+
+    <div class="w-1/2 mx-auto mt-24 rounded-lg overflow-hidden">
+      <div class="p-4">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-200 text-xl font-bold"
+            >Q) Write a function that greets the world</span
+          >
+          <button
+            class="copyButton px-4 py-2 text-white bg-stone-700 rounded hover:bg-stone-600 focus:outline-none focus:ring focus:ring-stone-400"
+          >
+            Copy Answer
+          </button>
+        </div>
+      </div>
+
+      <div class="px-3 py-2">
+        <pre class="language-python">
+                <code class="text-sm">
+# Your Python code goes here
+def greet():
+    return "Hello World!"
+</code>
+</pre>
+      </div>
+      <p class="text-right text-stone-500 mr-5"><i><a href="#">By: Anon_001</a></i></p>
+    </div>
+
+    <div class="w-1/2 mx-auto mt-24 rounded-lg overflow-hidden">
+      <div class="p-4">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-200 text-xl font-bold"
+            >Q) Write a function that greets Rahul specifically</span
+          >
+          <button
+            class="copyButton px-4 py-2 text-white bg-stone-700 rounded hover:bg-stone-600 focus:outline-none focus:ring focus:ring-stone-400"
+          >
+            Copy Answer
+          </button>
+        </div>
+      </div>
+
+      <div class="px-3 py-2">
+        <pre class="language-python">
+                <code class="text-sm">
+# Your Python code goes here
+def greet_Rahul():
+    return "Hello Rahul!"
+</code>
+</pre>
+      </div>
+      <p class="text-right text-stone-500 mr-5"><i><a href="#">By: Anon_002</a></i></p>
+    </div>
+
+    <!-- End Questions-->
+  </body>
+
+  <!-- Prism.js JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-python.min.js"></script>
+
+  <!-- JavaScript to copy the code -->
+  <script>
+
+    let copy_buttons = document.getElementsByClassName('copyButton');
+
+    for (let i = 0; i < copy_buttons.length; i++) {
+      const btn = copy_buttons[i];
+      btn.addEventListener('click', function(){copy_answer(i)});
+    }
+
+    function copy_answer(index){
+        console.log("copying answer of" + index);
+        let code_blocks = document.querySelectorAll('.language-python code');
+        const codeElement = code_blocks[index];
+        const textArea = document.createElement('textarea');
+        textArea.value = codeElement.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+  </script>
+</html>
