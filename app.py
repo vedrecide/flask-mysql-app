@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_bcrypt import Bcrypt
 
 import json
@@ -11,6 +11,7 @@ with open("./config.json", "r") as f:
   config = json.loads(f.read())
 
 app = Flask(__name__)
+app.secret_key = config["SECRET_KEY"]
 bcrypt = Bcrypt(app)
 try:
   conn = mysql.connector.connect(
@@ -35,7 +36,13 @@ with app.app_context():
 
 @app.route("/")
 def home():
-  return render_template("index.html")
+  try:
+    userid = session["id"]
+    cur.execute(f"SELECT * FROM User WHERE id = {userid}")
+    username = cur.fetchone()[1]
+  except KeyError:
+    username = None
+  return render_template("index.html", username=username)
 
 @app.route("/questions")
 def questions():
@@ -66,6 +73,9 @@ def login():
 
         cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
         user = cur.fetchone()
+
+        print(user[0], flush=True)
+        session["id"] = user[0]
         print(user, flush=True)
         
         success = "Successfully authorized into the Jedi temple"
