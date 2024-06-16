@@ -11,6 +11,7 @@ with open("./config.json", "r") as f:
   config = json.loads(f.read())
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 try:
   conn = mysql.connector.connect(
     user=config["DATABASE_USER"], 
@@ -30,7 +31,7 @@ except mysql.connector.Error as err:
     print(err, flush=True)
 
 with app.app_context():
-  cur.execute("CREATE TABLE IF NOT EXISTS User(id CHAR(36) PRIMARY KEY, username VARCHAR(30) NOT NULL, password BINARY(60) NOT NULL, teacher TINYINT)")
+  cur.execute("CREATE TABLE IF NOT EXISTS User(id CHAR(36) PRIMARY KEY, username VARCHAR(30) NOT NULL, password VARCHAR(60) NOT NULL, teacher TINYINT)")
 
 @app.route("/")
 def home():
@@ -43,12 +44,34 @@ def questions():
 @app.route("/login", methods=["GET", "POST"])
 def login():
   error = None
+  success = None
   if request.method == "POST":
-    # Use this comment for adding error whenever form values are invalid or null
-    # error = "Invalid credentials, please try again."
-    is_teacher = request.form.get("teacher")
-    print(request.form["username"], request.form["password"], "this is teacher" if is_teacher is not None else "", flush=True) #
-  return render_template("login.html", error=error)
+    username = request.form.get('username')
+    password = request.form.get('password')
+    is_teacher = 1 if request.form.get("teacher") is not None else 0
+
+    if len(username) < 8 or len(password) < 8:
+      error = "Username or password cannot be less than 8 characters, Choose wisely young/old one"
+    else:
+      cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+      user = cur.fetchone()
+      if user is not None:
+        error = "User already exists, Are you a clone trooper?"
+      else:
+        hashpw = bcrypt.generate_password_hash(password)
+        real_password = hashpw.decode("ascii")
+        print(real_password, flush=True)
+        cur.execute("INSERT INTO User (id, username, password, teacher) VALUES(%s, %s, %s, %s)", (str(uuid4()), username, real_password, is_teacher))
+        conn.commit()
+
+        cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+        user = cur.fetchone()
+        print(user, flush=True)
+        
+        success = "Successfully authorized into the Jedi temple"
+
+        # print(username, password, is_teacher, flush=True)
+  return render_template("login.html", error=error, success=success)
 
 if __name__ == "__main__":
   app.run(debug=bool(config["DEBUG"]))
