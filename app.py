@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bcrypt import Bcrypt
 
 import json
@@ -39,6 +39,16 @@ def home():
 @app.route("/questions")
 def questions():
   return render_template("questions.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+  error = None
+  if request.method == "POST":
+    # Use this comment for adding error whenever form values are invalid or null
+    # error = "Invalid credentials, please try again."
+    is_teacher = request.form.get("teacher")
+    print(request.form["username"], request.form["password"], "this is teacher" if is_teacher is not None else "", flush=True) #
+  return render_template("login.html", error=error)
 
 if __name__ == "__main__":
   app.run(debug=bool(config["DEBUG"]))

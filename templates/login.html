@@ -36,14 +36,14 @@
                         Let's just call the site 'HHW'
                     </p>
 
-                    <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+                    <form action="" method="post" class="mt-8 grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="FirstName" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                                 User Name
                             </label>
 
-                            <input type="text" id="FirstName" name="first_name"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
+                            <input type="text" id="FirstName" name="username" value="{{ request.form.username }}"
+                                class="p-2 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
@@ -51,16 +51,17 @@
                                 Password
                             </label>
 
-                            <input type="password" id="Password" name="password"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
+                            <input type="password" id="Password" name="password" value="{{ request.form.password }}"
+                                class="p-2 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
                         </div>
 
                         <div class="col-span-6">
                             <label for="MarketingAccept" class="flex gap-4">
                               <input
                                 type="checkbox"
-                                id="MarketingAccept"
-                                name="marketing_accept"
+                                id="isteacher"
+                                name="teacher"
+                                value="{{ request.form.teacher }}"
                                 class="size-5 rounded-md border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
                               />
                 
@@ -77,11 +78,14 @@
                                 Create an account
                             </button>
 
-                            <p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
+                            <!--<p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
                                 Already have an account?
                                 <a href="#" class="text-gray-700 underline dark:text-gray-200">Log in</a>.
-                            </p>
+                            </p>-->
                         </div>
+                        {% if error %}
+                            <p class="error"><strong>Error:</strong> {{ error }}
+                        {% endif %}
                     </form>
                 </div>
             </main>
