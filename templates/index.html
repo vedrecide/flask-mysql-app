@@ -24,9 +24,10 @@
         </div>
         {% if username %}
         <div class="flex items-center gap-4">
-          <p class="text-gray-600 transition hover:text-gray-600/75 dark:text-white dark:hover:text-white/75">{{username}}</p>
+          <p class="text-gray-200 text-xl dark:text-gray-400">Welcome back, <b class="text-gray-600 text-xl dark:text-white">{{username}}</b> </p>
         </div>
         {% endif %}
+        {% if not username %}
         <div class="flex items-center gap-4">
           <div class="sm:flex sm:gap-4">
             <a class="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-blue-700"
@@ -41,6 +42,7 @@
               </a>
             </div>
           </div>
+        
 
           <div class="block md:hidden">
             <button
@@ -52,6 +54,7 @@
             </button>
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </header>
@@ -102,7 +105,7 @@
 
     <!-- Python questions -->
 
-    <a href="#" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
+    <a href="/questions" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
       <!--blue bg and white text would look good ngl, remove the white border-->
       <div
@@ -132,7 +135,7 @@
 
     <!-- SQL questions -->
 
-    <a href="#" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
+    <a href="/questions" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
@@ -162,7 +165,7 @@
 
     <!-- HTML questions -->
 
-    <a href="#" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
+    <a href="/questions"class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
@@ -192,7 +195,7 @@
 
     <!-- Javascript -->
 
-    <a href="#" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
+    <a href="/questions" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
