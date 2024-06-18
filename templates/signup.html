@@ -29,7 +29,7 @@
                     </a>
 
                     <h1 class="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
-                        Welcome back to [We still haven't thought of a name yet, have we?]
+                        Welcome to [We still haven't thought of a name yet, have we?]
                     </h1>
 
                     <p class="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">
@@ -54,12 +54,34 @@
                             <input type="password" id="Password" name="password" value="{{ request.form.password }}"
                                 class="p-2 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
                         </div>
+
+                        <div class="col-span-6">
+                            <label for="MarketingAccept" class="flex gap-4">
+                              <input
+                                type="checkbox"
+                                id="isteacher"
+                                name="teacher"
+                                value="{{ request.form.teacher }}"
+                                class="size-5 rounded-md border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
+                              />
+                
+                              <span class="text-sm text-gray-700 dark:text-gray-200">
+                                Teacher account (Can upload questions)
+                              </span>
+                            </label>
+                          </div>
+
                     
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
                             <button
                                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white">
-                                Log in
+                                Create an account
                             </button>
+
+                            <!--<p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
+                                Already have an account?
+                                <a href="#" class="text-gray-700 underline dark:text-gray-200">Log in</a>.
+                            </p>-->
                         </div>
                     </form>
                     <br>

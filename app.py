@@ -13,6 +13,7 @@ with open("./config.json", "r") as f:
 app = Flask(__name__)
 app.secret_key = config["SECRET_KEY"]
 bcrypt = Bcrypt(app)
+
 try:
   conn = mysql.connector.connect(
     user=config["DATABASE_USER"], 
@@ -38,7 +39,7 @@ with app.app_context():
 def home():
   try:
     userid = session["id"]
-    cur.execute(f"SELECT * FROM User WHERE id = {userid}")
+    cur.execute(f"SELECT * FROM User WHERE id = '{userid}'")
     username = cur.fetchone()[1]
   except KeyError:
     username = None
@@ -48,8 +49,8 @@ def home():
 def questions():
   return render_template("questions.html")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
   error = None
   success = None
   if request.method == "POST":
@@ -59,28 +60,55 @@ def login():
 
     if len(username) < 8 or len(password) < 8:
       error = "Username or password cannot be less than 8 characters, Choose wisely young/old one"
-    else:
-      cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
-      user = cur.fetchone()
-      if user is not None:
-        error = "User already exists, Are you a clone trooper?"
-      else:
-        hashpw = bcrypt.generate_password_hash(password)
-        real_password = hashpw.decode("ascii")
-        print(real_password, flush=True)
-        cur.execute("INSERT INTO User (id, username, password, teacher) VALUES(%s, %s, %s, %s)", (str(uuid4()), username, real_password, is_teacher))
-        conn.commit()
+      return render_template("signup.html", error=error, success=success)
 
-        cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
-        user = cur.fetchone()
+    cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+    user = cur.fetchone()
+    
+    if user is not None:
+      error = "User already exists, Are you a clone trooper?"
+      return render_template("signup.html", error=error, success=success)
 
-        print(user[0], flush=True)
-        session["id"] = user[0]
-        print(user, flush=True)
+    hashpw = bcrypt.generate_password_hash(password)
+    real_password = hashpw.decode("ascii")
+
+    cur.execute("INSERT INTO User (id, username, password, teacher) VALUES(%s, %s, %s, %s)", (str(uuid4()), username, real_password, is_teacher))
+    conn.commit()
+
+    cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+    user = cur.fetchone()
+    session["id"] = user[0]
+    success = "Successfully authorized into the Jedi temple"
+
+  return render_template("signup.html", error=error, success=success)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+  
+  error = None
+  success = None
+  if request.method == "POST":
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+    user = cur.fetchone()
+    
+    if user is None:
+      error = "User does not exist! New here? Create an account using the signup page"
+      return render_template("login.html", error=error, success=success)
+
+    cur.execute(f"SELECT * FROM User WHERE username = '{username}'")
+    user = cur.fetchone()
         
-        success = "Successfully authorized into the Jedi temple"
+    check = bcrypt.check_password_hash(user[2], password)
+    if not check:
+      error = "Password does not match!"
+      return render_template("login.html", error=error, success=success)
 
-        # print(username, password, is_teacher, flush=True)
+    session["id"] = user[0]
+    success = "Logged in as " + user[1]
+  
   return render_template("login.html", error=error, success=success)
 
 if __name__ == "__main__":
