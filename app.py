@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_bcrypt import Bcrypt
 
 import json
@@ -34,6 +34,7 @@ except mysql.connector.Error as err:
 
 with app.app_context():
   cur.execute("CREATE TABLE IF NOT EXISTS User(id CHAR(36) PRIMARY KEY, username VARCHAR(30) NOT NULL, password VARCHAR(60) NOT NULL, teacher TINYINT)")
+  cur.execute("CREATE TABLE IF NOT EXISTS Question(id INT PRIMARY KEY, topic VARCHAR(15) NOT NULL, question TEXT NOT NULL, answer TEXT NOT NULL, author VARCHAR(30) NOT NULL)")
 
 @app.route("/")
 def home():
@@ -79,6 +80,7 @@ def signup():
     user = cur.fetchone()
     session["id"] = user[0]
     success = "Successfully authorized into the Jedi temple"
+    return redirect(url_for("home"))
 
   return render_template("signup.html", error=error, success=success)
 
@@ -108,6 +110,7 @@ def login():
 
     session["id"] = user[0]
     success = "Logged in as " + user[1]
+    return redirect(url_for("home"))
   
   return render_template("login.html", error=error, success=success)
 
