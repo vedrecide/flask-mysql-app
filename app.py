@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_bcrypt import Bcrypt
 
+import functools
 import json
 import mysql.connector
 from mysql.connector import errorcode
@@ -36,6 +37,17 @@ with app.app_context():
   cur.execute("CREATE TABLE IF NOT EXISTS User(id CHAR(36) PRIMARY KEY, username VARCHAR(30) NOT NULL, password VARCHAR(60) NOT NULL, teacher TINYINT)")
   cur.execute("CREATE TABLE IF NOT EXISTS Question(id INT PRIMARY KEY, topic VARCHAR(15) NOT NULL, question TEXT NOT NULL, answer TEXT NOT NULL, author VARCHAR(30) NOT NULL)")
 
+
+def login_required(route):
+  @functools.wraps(route)
+  def wrapper(*args, **kwargs):
+    if session.get("id") is None:
+      return redirect(url_for("home"))
+
+    return route(*args, **kwargs)
+  
+  return wrapper
+
 @app.route("/")
 def home():
   try:
@@ -45,6 +57,11 @@ def home():
   except KeyError:
     username = None
   return render_template("index.html", username=username)
+
+@app.route("/upload")
+@login_required
+def upload_question():
+  return render_template("upload.html")
 
 @app.route("/questions")
 def questions():
