@@ -6,46 +6,48 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Upload question</title>
 </head>
-<body>
+<body class="bg-stone-900">
   <div class="flex min-h-screen items-center justify-start">
     <div class="mx-auto w-full max-w-lg">
-      <h1 class="text-4xl font-medium">Upload Question</h1>
-      <p class="mt-3">It feels like a lot of people will benefit from what you are about to write</p>
+      <h1 class="text-2xl font-bold text-stone-100 sm:text-3xl">Upload A Question</h1>
+      <br>
+      <p class="text-lg text-stone-200 sm:text-xl">It seems like a lot of people will benefit from what you are about to write</p>
   
-      <form action="" class="mt-10">
-        <div class="grid w-[35rem] grid-cols-4 gap-2 rounded-xl bg-gray-200 p-2">
+      <form action="" class="mt-10" method="post">
+        <div class="grid w-[35rem] grid-cols-4 gap-2 rounded-xl bg-stone-700 p-2 text-stone-200">
           <div>
-              <input type="radio" name="option" id="python" value="1" class="peer hidden" checked />
-              <label for="python" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black peer-checked:font-bold peer-checked:text-white">Python</label>
+              <input type="radio" name="option" id="python" value="python" class="peer hidden" checked />
+              <label for="python" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-stone-300 peer-checked:font-bold peer-checked:text-stone-700">Python</label>
           </div>
   
           <div>
-              <input type="radio" name="option" id="sql" value="2" class="peer hidden" />
-              <label for="sql" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black peer-checked:font-bold peer-checked:text-white">SQL</label>
+              <input type="radio" name="option" id="sql" value="sql" class="peer hidden" />
+              <label for="sql" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-stone-300 peer-checked:font-bold peer-checked:text-stone-700">SQL</label>
           </div>
   
           <div>
-              <input type="radio" name="option" id="html" value="3" class="peer hidden" />
-              <label for="html" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black peer-checked:font-bold peer-checked:text-white">HTML</label>
+              <input type="radio" name="option" id="html" value="html" class="peer hidden" />
+              <label for="html" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-stone-300 peer-checked:font-bold peer-checked:text-stone-700">HTML</label>
           </div>
   
           <div>
-              <input type="radio" name="option" id="javascript" value="3" class="peer hidden" />
-              <label for="javascript" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black peer-checked:font-bold peer-checked:text-white">Javascript</label>
+              <input type="radio" name="option" id="javascript" value="javascript" class="peer hidden" />
+              <label for="javascript" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-stone-300 peer-checked:font-bold peer-checked:text-stone-700">Javascript</label>
           </div>
         </div>
         <br>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="relative z-0 col-span-2">
-            <textarea name="question" id="question" rows="5" class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" "></textarea>
-            <label for="question" class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Question</label>
+            <textarea name="question" id="question" rows="2" class="peer block w-full appearance-none border-0 border-b border-stone-300 bg-transparent py-2.5 px-0 text-sm text-stone-300 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" "></textarea>
+            <label for="question" class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-stone-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Question</label>
           </div>
           <div class="relative z-0 col-span-2">
-            <textarea name="answer" id="answer" rows="5" class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" "></textarea>
-            <label for="answer" class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Answer</label>
+            <textarea name="answer" id="answer" rows="5" class="peer block w-full appearance-none border-0 border-b border-stone-300 bg-transparent py-2.5 px-0 text-sm text-stone-300 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" "></textarea>
+            <label for="answer" class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-stone-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Answer</label>
           </div>
         </div>
-        <button type="submit" class="mt-5 rounded-md bg-black px-10 py-4 text-white">Upload</button>
+        <button type="submit" class="mt-5 rounded-md bg-stone-200 px-8 py-2 text-stone-900 font-bold">Upload</button>
+        <a href="/" class="text-stone-400 m-5 underline italic transition hover:text-stone-300">Back to homepage</a>
       </form>
     </div>
   </div>
