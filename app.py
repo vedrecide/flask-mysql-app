@@ -83,11 +83,50 @@ def upload_question():
   return render_template("upload.html")
 
 
-@app.route("/questions")
-def questions():
-  cur.execute(f"SELECT question, answer, author_id FROM Question WHERE TOPIC = 'python'")
-  data = cur.fetchall()
-  return render_template("questions.html", questions = map(json.dumps, data))
+@app.route("/questions_python")
+def questions_py():
+  cur.execute(f"SELECT question, answer, username FROM Question, User WHERE Question.author_id = User.id AND TOPIC = 'python'")
+  ques, ans, user = [],[],[]
+  for elem in cur.fetchall():
+    ques.append(elem[0])
+    ans.append(elem[1])
+    user.append(elem[2])
+  
+  return render_template("questions.html", questions = ques, answers = ans, users = user, count = len(ques), topic = 'Python')
+
+@app.route("/questions_sql")
+def questions_sql():
+  cur.execute(f"SELECT question, answer, username FROM Question, User WHERE Question.author_id = User.id AND TOPIC = 'sql'")
+  ques, ans, user = [],[],[]
+  for elem in cur.fetchall():
+    ques.append(elem[0])
+    ans.append(elem[1])
+    user.append(elem[2])
+  
+  return render_template("questions.html", questions = ques, answers = ans, users = user, count = len(ques), topic = 'SQL')
+
+@app.route("/questions_html")
+def questions_html():
+  cur.execute(f"SELECT question, answer, username FROM Question, User WHERE Question.author_id = User.id AND TOPIC = 'html'")
+  
+  ques, ans, user = [],[],[]
+  for elem in cur.fetchall():
+    ques.append(elem[0])
+    ans.append(elem[1])
+    user.append(elem[2])
+  
+  return render_template("questions.html", questions = ques, answers = ans, users = user, count = len(ques), topic = 'HTML')
+
+@app.route("/questions_javascript")
+def questions_javascript():
+  cur.execute(f"SELECT question, answer, username FROM Question, User WHERE Question.author_id = User.id AND TOPIC = 'javascript'")
+  ques, ans, user = [],[],[]
+  for elem in cur.fetchall():
+    ques.append(elem[0])
+    ans.append(elem[1])
+    user.append(elem[2])
+  
+  return render_template("questions.html", questions = ques, answers = ans, users = user, count = len(ques), topic = 'JavaScript')
 
 
 @app.route("/signup", methods=["GET", "POST"])

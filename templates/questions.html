@@ -15,7 +15,7 @@
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="text-center sm:text-left">
           <h1 class="text-2xl font-bold text-stone-100 sm:text-3xl">
-            TOPIC: Python
+            TOPIC: {{topic}}
           </h1>
 
           <p class="mt-1.5 text-sm text-stone-200">
@@ -53,12 +53,12 @@
 
   <!-- Questions -->
 
-  {% for question in questions %}
-  {% set ques, ans, author = question.split(',')%}
+  {% for i in range(count) %}
+  {% set ques, ans, author = questions[i], answers[i], users[i] %}
   <div class="w-1/2 mx-auto mt-24 rounded-lg overflow-hidden">
     <div class="p-4">
       <div class="flex items-center justify-between">
-        <span class="text-gray-200 text-xl font-bold">{{ ques[2:-1] }}</span>
+        <span class="text-gray-200 text-xl font-bold">{{ ques }}</span>
         <button
           class="copyButton px-4 py-2 text-white bg-stone-700 rounded hover:bg-stone-600 focus:outline-none focus:ring focus:ring-stone-400">
           Copy Answer
@@ -67,13 +67,13 @@
     </div>
 
     <div class="px-3 py-2">
-      <pre class="language-python">
-                <code class="text-sm">
-{{ ans[2:-1] }}
+      <pre>
+                <code class="text-sm language-{{ {'Python': 'python', 'SQL':'js', 'JavaScript':'js', 'HTML':'html'}[topic] }}">
+{{ ans.replace('\\n', '\n').replace('\\r', '\r')}}
 </code>
 </pre>
     </div>
-    <p class="text-right text-stone-500 mr-5"><i><a href="#">By: {{author[2:-2]}}</a></i></p>
+    <p class="text-right text-stone-500 mr-5"><i><a href="#">By: {{author}}</a></i></p>
   </div>
 
   {% endfor %}
