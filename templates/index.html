@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
 
-  
+
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
   <script type=text/javascript> $(function() { $("#logout").click(function (event) { $.getJSON('/logout', { },
-  function(data) { }); return false; }); }); </script> 
+  function(data) { }); return false; }); }); </script>
 </head>
 
 <body class="bg-gray-900">
@@ -29,10 +29,12 @@
         </div>
         {% if username %}
         <div class="flex items-center gap-4">
-          <p class="text-gray-200 text-xl dark:text-gray-400">Welcome back, <b class="text-gray-600 text-xl dark:text-white">{{username}}</b> </p>
-          <a id="logout" class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-red-700">
-              Logout
-            </a>
+          <p class="text-gray-200 text-xl dark:text-gray-400">Welcome back, <b
+              class="text-gray-600 text-xl dark:text-white">{{username}}</b> </p>
+          <a id="logout"
+            class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-red-700">
+            Logout
+          </a>
         </div>
         {% endif %}
         {% if not username %}
@@ -50,7 +52,7 @@
               </a>
             </div>
           </div>
-        
+
 
           <div class="block md:hidden">
             <button
@@ -74,12 +76,12 @@
       <div class="mx-auto max-w-3xl text-center">
         <h1
           class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl p-5">
-          An Open Platform
-
-          <span class="sm:block"> To Share Coding Problems </span>
+          CodeFind
         </h1>
 
         <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+          <b>An open platform to share coding problems </b> </p>
+        <p class="mx-auto mt-4 max-w-lg sm:text-lg/relaxed text-gray-400">
           Browse through a gallery of programming questions for different topics, or upload your own questions!
         </p>
 
@@ -91,12 +93,14 @@
           {% if teacher %}
           <a class="flex block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
             href="/upload">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
-              </svg>
-              &ensp;
-              Upload question
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-question-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+              <path
+                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94" />
+            </svg>
+            &ensp;
+            Upload question
           </a>
           {% endif %}
         </div>
@@ -152,7 +156,7 @@
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
-      class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png')] bg-contain bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800">
+        class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png')] bg-contain bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800">
         <div class="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-10 sm:size-12" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -178,11 +182,12 @@
 
     <!-- HTML questions -->
 
-    <a href="/questions_html"class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
+    <a href="/questions_html" class="group relative block w-1/4 h-64 sm:h-80 lg:h-96 m-5">
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
-      class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg')] bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800" style="background-size: 60%;">
+        class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg')] bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800"
+        style="background-size: 60%;">
         <div class="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-10 sm:size-12" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -212,7 +217,8 @@
       <span class="absolute inset-0 border-2 border-dashed border-white"></span>
 
       <div
-      class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png')] bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800" style="background-size: 50%;">
+        class="relative flex h-full transform items-end text-white bg-[url('https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png')] bg-no-repeat bg-center bg-gray-700 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:bg-none group-hover:bg-gray-800"
+        style="background-size: 50%;">
         <div class="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-10 sm:size-12" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">

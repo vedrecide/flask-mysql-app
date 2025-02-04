@@ -4,8 +4,10 @@ from flask_bcrypt import Bcrypt
 import functools
 import json
 import mysql.connector
+from mysql.connector import (connection)
 from mysql.connector import errorcode
 from uuid import uuid4
+
 
 with open("./config.json", "r") as f:
   config = json.loads(f.read())
@@ -14,8 +16,9 @@ app = Flask(__name__)
 app.secret_key = config["SECRET_KEY"]
 bcrypt = Bcrypt(app)
 
+
 try:
-  conn = mysql.connector.connect(
+  conn = connection.MySQLConnection(
     user=config["DATABASE_USER"], 
     password=config["DATABASE_PASSWORD"], 
     host=config["DATABASE_HOST"], 
@@ -31,6 +34,8 @@ except mysql.connector.Error as err:
     print("Database does not exist", flush=True)
   else:
     print(err, flush=True)
+
+
 
 with app.app_context():
   cur.execute("CREATE TABLE IF NOT EXISTS User(id CHAR(36) PRIMARY KEY, username VARCHAR(30) NOT NULL, password VARCHAR(60) NOT NULL, teacher TINYINT)")
